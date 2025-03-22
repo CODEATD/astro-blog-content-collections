@@ -1,0 +1,109 @@
+---
+import { Image, Picture } from "astro:assets";
+import MainLayout from "../layouts/MainLayout.astro";
+
+import post05Img from '@images/post-05.png'
+
+---
+
+
+<MainLayout>
+    <p class="text-5xl text-white">Imágenes</p>
+
+    <h1>Elemento img y loading eager</h1>
+    <img
+        loading="eager"
+        src="/assets/images/post-05.png"
+        width="250"
+        height="250"
+    >
+    <h1>Imagen con estilos</h1>
+    <img
+        style={{
+            width: '250px',
+            height: '250px'
+        }}
+        loading="eager"
+        src="/assets/images/post-05.png"
+        width="250"
+        height="250"
+    >
+
+    <div
+    style={{
+        height: '150px',
+        marging: '20px',
+        background: 'red',
+        }}
+    >
+    </div>
+
+    <h1>Componente Image y atributos</h1>
+    <Image
+        src={post05Img}
+        width="250"
+        height="250"
+        alt="Imagen de prueba"
+    />
+
+    <h1>Componente Image y quality low</h1>
+    <Image
+        quality="low"
+        src={post05Img}
+        width="250"
+        height="250"
+        alt="Imagen de prueba"
+    />
+
+    <h1>Componente Image y quality high</h1>
+    <Image
+        quality="high"
+        src={post05Img}
+        width="250"
+        height="250"
+        alt="Imagen de prueba"
+    />
+
+    <h1>Componente Image y formatos</h1>
+    <Image
+        src={post05Img}
+        format="jpg"
+        width="250"
+        height="250"
+        alt="Imagen de prueba"
+    />
+
+    <h1>Componente picture: formats and widths</h1>
+    <Picture
+        src={post05Img}
+        formats={["webp", "avif", "jpeg"]}
+        widths={[240, 540, 720, post05Img.width]}
+        sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1280px) 720px, ${post05Img.width}px`}
+        width="250"
+        height="250"
+        alt="Imagen de prueba"
+    />
+
+    <h1>Componente picture: densities</h1>
+    <Picture
+        src={post05Img}
+        densities={[1, 5, 2]}
+        width="250"
+        height="250"
+        alt="Imagen de prueba"
+    />
+
+    <h1>Elemento img y loading lazy</h1>
+    <img
+        loading="lazy"
+        src="/assets/images/post-01.png"
+        width="250"
+        height="250"
+    >
+</MainLayout>
+
+<style>
+    h1 {
+        @apply text-white mt-10 text-3xl mb-3;
+    }
+</style>
