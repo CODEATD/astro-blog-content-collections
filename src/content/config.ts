@@ -1,4 +1,4 @@
-import { defineCollection, z } from "astro:content";
+import { defineCollection, reference, z } from "astro:content";
 
 const blogCollection = defineCollection({
     type: 'content',
@@ -7,12 +7,29 @@ const blogCollection = defineCollection({
             title: z.string(),
             date: z.date(),
             description: z.string(),
-            image: image(), // Simplificado sin .refine()
-            author: z.string(),
+            // author: z.string(),
+            // image: image().refine((img) => img.width >= 1200, {
+            //     message: 'Image should be lower than 2000px width',
+            // }),
+            image: image(),
             tags: z.array(z.string()),
+
+            author: reference('author'),
         }),
+
 });
+
+const authorCollection = defineCollection({
+    type: 'data',
+    schema: ({ image }) =>
+        z.object({
+            name: z.string(),
+            bio: z.string().optional(),
+            avatar: image(), // Simplificado sin .refine()
+        }),
+})
 
 export const collections = {
     blog: blogCollection,
+    author: authorCollection,
 };
