@@ -3,65 +3,84 @@ import { getCollection } from "astro:content";
 import type { GetStaticPaths } from "astro";
 import BlogLayout from "../layouts/BlogLayout.astro";
 import Image from "astro/components/Image.astro";
+import { getEntry } from "astro:content";
+import { Formatter } from "@utils/Formatter";
 
 export const getStaticPaths = (async () => {
-    // getCollection blog
-    const blogPosts = await getCollection('blog');
+  // getCollection blog
+  const blogPosts = await getCollection("blog");
 
-    return blogPosts.map((post) => ({
-        params: { slug: post.slug },
-        props: { post: post }
-    }));
-    // return [
-    //     {
-    //         params: { slug: 'post-01' },
-    //         props: { title: 'Primer Post' } // { post: post }
-    //     }
-    // ];
+  return blogPosts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post: post },
+  }));
+  // return [
+  //     {
+  //         params: { slug: 'post-01' },
+  //         props: { title: 'Primer Post' } // { post: post }
+  //     }
+  // ];
 }) satisfies GetStaticPaths;
 
 const { post } = Astro.props;
 const frontmatter = post.data;
 
 const { Content, headings } = await post.render();
+const author = (await getEntry('author', post.data.author.id))!.data;
+// const author = (await getEntry(frontmatter.author)).data;
 // console.log(headings);
-console.log(post);
+// console.log(post);
 ---
 
 <BlogLayout title={frontmatter.title}>
-    <h1 class="text-xs text-gray-500 mb-0">{ frontmatter.title }</h1>
-    <h4 class="text-md text-gray-400 mb-0">{ frontmatter.author }</h4>
+  <h1 class="text-xs text-gray-500 mb-0">{frontmatter.title}</h1>
 
+  <div class="text-md text-gray-400 mb-0 flex flex-row mt-2">
     <Image
-        class="object-cover w-full h-[250px] mt-5 rounded-md"
-        src={frontmatter.image}
-        alt={frontmatter.title}
-        width={600}
-        height={200}
-        quality="low"
-        loading="lazy"
-        transition:name={`${post.slug}-image`}
+      src={author.avatar}
+      class="rounded-full"
+      alt={author.name}
+      width={50}
+      height={50}
+      loading="lazy"
     />
+    <div class="flex flex-col ml-5">
+      <a href="#">{author.name}</a>
+      <span class="text-xs text-gray-200">
+        {Formatter.formatDate(frontmatter.date)}
+      </span>
+    </div>
+  </div>
 
-    <!-- Table contents -->
-     <h3>Tabla de contenidos</h3>
-     <ol>
-       {
-           headings.map((heading, index) => (
-               <li>
-                   <a href={`#${ heading.slug }`}>
-                       { index + 1 } - { heading.text }
-                   </a>
-               </li>
-           ))
-       }
-     </ol>
+  <Image
+    class="object-cover w-full h-[250px] mt-5 rounded-md"
+    src={frontmatter.image}
+    alt={frontmatter.title}
+    width={600}
+    height={200}
+    quality="low"
+    loading="lazy"
+    transition:name={`${post.slug}-image`}
+  />
 
-    <!-- Content -->
-     <Content />
+  <!-- Table contents -->
+  <h3>Tabla de contenidos</h3>
+  <ol>
+    {
+      headings.map((heading, index) => (
+        <li>
+          <a href={`#${heading.slug}`}>
+            {index + 1} - {heading.text}
+          </a>
+        </li>
+      ))
+    }
+  </ol>
 
-     <div class="my-20">
-        <a href="#btn-back">Ir Arriba</a>
-     </div>
+  <!-- Content -->
+  <Content />
 
+  <div class="my-20">
+    <a href="#btn-back">Ir Arriba</a>
+  </div>
 </BlogLayout>
