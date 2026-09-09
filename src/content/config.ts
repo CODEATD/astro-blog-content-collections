@@ -7,14 +7,21 @@ const blogCollection = defineCollection({
             title: z.string(),
             date: z.date(),
             description: z.string(),
+
             // author: z.string(),
+
             // image: image().refine((img) => img.width >= 1200, {
             //     message: 'Image should be lower than 2000px width',
             // }),
             image: image(),
+            author: reference('author'),
+
+            // Relation
             tags: z.array(z.string()),
 
-            author: reference('author'),
+            // Boolean
+            isDraft: z.boolean().default(false),
+
         }),
 
 });

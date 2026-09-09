@@ -1,31 +1,27 @@
 ---
 import type { GetStaticPaths } from "astro";
-import { Image } from 'astro:assets';
+import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 import { siteConfig } from "src/config/site-config";
 import TypeBlogPost from "src/components/posts/TypeBlogPost.astro";
 import MainLayout from "../layouts/MainLayout.astro";
 
+export const getStaticPaths = (async () => {
+  // const authors = getCollection('author');
+  // const posts = getCollection('blog');
+  const [authors, posts] = await Promise.all([
+    getCollection("author"),
+    getCollection("blog"),
+  ]);
 
-export const getStaticPaths = (async() => {
-
-    // const authors = getCollection('author');
-    // const posts = getCollection('blog');
-    const [authors, posts] = await Promise.all([
-        getCollection('author'),
-        getCollection('blog'),
-    ])
-
-    return authors.map( author => ({
-        params: { author: author.id },
-        props: {
-            blogPosts: posts.filter( post => post.data.author.id === author.id ),
-            author: author.data,
-        }
-    }) )
+  return authors.map((author) => ({
+    params: { author: author.id },
+    props: {
+      blogPosts: posts.filter((post) => post.data.author.id === author.id),
+      author: author.data,
+    },
+  }));
 }) satisfies GetStaticPaths;
-
-
 
 const { blogPosts, author } = Astro.props;
 ---
@@ -37,7 +33,9 @@ const { blogPosts, author } = Astro.props;
         {siteConfig.title}
       </h1>
 
-      <div class="text-md text-gray-400 mb-0 flex flex-row mt-2">
+      <a href="/">Regresar</a>
+
+      <div class="text-md text-gray-400 mb-0 flex flex-row mt-6">
         <Image
           class="rounded-full"
           src={author.avatar}
@@ -52,7 +50,7 @@ const { blogPosts, author } = Astro.props;
         </div>
       </div>
 
-      <div class="grid grid-cols-1 gap-8 mt-8 md:mt-16 md:grid-cols-2">
+      <div class="grid grid-cols-1 gap-8 mt-8 md:mt-12 md:grid-cols-2">
         {blogPosts.map((post) => <TypeBlogPost post={post} />)}
       </div>
     </div>

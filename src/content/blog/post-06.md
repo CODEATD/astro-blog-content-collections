@@ -5,6 +5,7 @@ description: Lorem ipsum dolor sit amet.
 author: jane-doe
 image: 'images/post-05.png'
 tags: [CSS, Web Design, Frontend]
+isDraft: true
 ---
 
 # CSS Grid Layout: Una guía completa

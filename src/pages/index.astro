@@ -10,8 +10,13 @@ interface Props {
 }
 
 const { title = siteConfig.title, description = siteConfig.description } = Astro.props;
-const blogPosts = await getCollection('blog');
+const blogPosts = await getCollection(
+    'blog',
+    (post) => post.data.isDraft === false
+);
 // console.log(blogPosts);
+
+// [].filter(post)
 ---
 
 <MainLayout title="CODEATD's Blog">
