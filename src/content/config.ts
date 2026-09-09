@@ -33,6 +33,10 @@ const authorCollection = defineCollection({
             name: z.string(),
             bio: z.string().optional(),
             avatar: image(), // Simplificado sin .refine()
+            twitter: z.string(),
+            linkedIn: z.string(),
+            github: z.string(),
+            subtitle: z.string(),
         }),
 })
 
