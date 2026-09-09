@@ -2,10 +2,13 @@
 
 [![Astro](https://img.shields.io/badge/Astro-5.x-BC52EE?style=flat-square&logo=astro&logoColor=white)](https://astro.build)
 [![Bun](https://img.shields.io/badge/Bun-1.1-black?style=flat-square&logo=bun&logoColor=white)](https://bun.sh)
+[![Netlify](https://img.shields.io/badge/Netlify-Deployed-00C7B7?style=flat-square&logo=netlify&logoColor=white)](https://astro-blog-content-collections.netlify.app/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
 [![MDX](https://img.shields.io/badge/MDX-4.x-FCB32C?style=flat-square&logo=mdx&logoColor=black)](https://mdxjs.com)
 [![Zod](https://img.shields.io/badge/Zod-Validation-3E67B1?style=flat-square&logo=zod&logoColor=white)](https://zod.dev)
+
+> 🌐 **Demo en producción:** [https://astro-blog-content-collections.netlify.app/](https://astro-blog-content-collections.netlify.app/)
 
 Proyecto desarrollado a lo largo de las **Secciones 5 y 6** del curso *"Astro: El framework para sitios web orientados al contenido"* impartido por Fernando Herrera.
 
