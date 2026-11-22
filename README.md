@@ -215,3 +215,7 @@ const blogCollection = defineCollection({
 ---
 
 > 💡 **Nota de Estudio:** Este repositorio sirve como base de consulta y referencia técnica para la implementación de blogs de alto rendimiento con Astro, arquitectura basada en colecciones de contenido y tipado estricto con TypeScript y Zod.
+
+---
+
+Hecho por [CODE ATD](https://codeatd.dev) siguiendo el curso de [Fernando Herrera](https://fernando-herrera.com/).
